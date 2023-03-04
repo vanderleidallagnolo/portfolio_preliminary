@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Utility pages, references and implementation examples</title>
+  </head>
+  <body>
+    <header style="background-color: red;">
+      <h1>Utilities, references and examples of implementations developed by Vanderlei</h1>
+    </header>
+    <nav style="background-color: orange;">
+      <ul>
+        <li><a href="#" onclick="alert('In development');">Home</a></li>
+        <li><a href="#" onclick="alert('In development');">About</a></li>
+        <li><a href="#" onclick="alert('In development');">Contact</a></li>
+      </ul>
+    </nav>
+	
+	<!-- style for the section CONTENTS -->
+	   <style>
+      .flex-container {
+        display: flex;
+      }
+    </style>
+	<!-- style for the section CONTENTS -->
+	
+   <section style="background-color: yellow;">
+   
+      <h2>Contents</h2>
+	  
+      <div class="flex-container">
+	  
+        <div style="background-color: lightblue; width: 20%;">
+		
+			<!-- Bloco de style do menu treeview -->
+			<style>
+			ul, #myUL {
+			  list-style-type: none;
+			}
+			
+			#myUL {
+			  margin: 0;
+			  padding: 0;
+			}
+
+			.caret {
+			  cursor: pointer;
+			  -webkit-user-select: none; /* Safari 3.1+ */
+			  -moz-user-select: none; /* Firefox 2+ */
+			  -ms-user-select: none; /* IE 10+ */
+			  user-select: none;
+			}
+
+			.caret::before {
+			  content: "\25B6";
+			  color: black;
+			  display: inline-block;
+			  margin-right: 6px;
+			}
+
+			.caret-down::before {
+			  -ms-transform: rotate(90deg); /* IE 9 */
+			  -webkit-transform: rotate(90deg); /* Safari */'
+			  transform: rotate(90deg);  
+			}
+
+			.nested {
+			  display: none;
+			}
+
+			.active {
+			  display: block;
+			}
+			
+			.liTreeWithLink {
+			
+				cursor: pointer;
+				
+			}
+			</style>
+			<!-- bloco de style do menu treeview -->
+
+			<!-- começa o menu treeview --> 
+			<ul id="myUL">
+			  <li><span class="caret">Start</span>
+				<ul class="nested">
+				  <li><span class="caret">Web</span>
+					<ul class="nested">
+					  <li><span class="caret">Javascript</span>
+						<ol class="nested">
+						  <li onclick="fShowContentDetail(SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING);" class="liTreeWithLink" >Mouse dragging element</li>
+						  <li>In development</li>
+						  <li>In development</li>
+						  <li>In development</li>
+						</ol>
+					  </li>
+					  <li>In development</li>
+					  <li>In development</li>
+					</ul>
+				  </li>  
+				  <li>Business</li>
+				  <li><span class="caret">Projects</span>
+					<ul class="nested">
+					  <li><span class="caret">Cerva Show</span>
+						<ol class="nested">
+						  <li>Site</li>
+						  <li>Classificação de cerveja</li>
+						  <li>To be released</li>
+						  <li>To be released</li>
+						</ul>
+					  </li>
+					  <li>To be released</li>
+					  <li>To be released</li>
+					</ul>
+				  </li>  
+				</ul>
+			  </li>
+			</ul>
+			<!-- termina o menu treeview -->
+
+			<!-- bloco de script que permite o funcionamento da função colapsável do menu treeview -->
+			<script>
+			
+				var toggler = document.getElementsByClassName("caret");
+				var i;
+
+				for (i = 0; i < toggler.length; i++) {
+				  toggler[i].addEventListener("click", function() {
+					this.parentElement.querySelector(".nested").classList.toggle("active");
+					this.classList.toggle("caret-down");
+				  });
+				}
+
+				const SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING = 0;
+			
+				function fShowContentDetail(pContentDetailId)
+				{
+				
+					switch(pContentDetailId)
+					{
+					
+						case SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING:
+							window.open("example_mouse_drag_element.html");
+							break;
+							
+						default:
+							break;
+					
+					}
+					// end switch(pContentDetailId)				
+				}
+				// function fShowContentDetail(pContentDetailId)
+			
+			</script>
+			<!-- bloco de script que permite o funcionamento da função colapsável do menu treeview --> 
+			<!-- FIM -->
+			
+        </div>
+        <div style="background-color: #ffcc99; width: 80%;">
+          <p>Click on a content in the menu in the left.</p>
+        </div>
+      </div>
+<style>
+
+/* Footer */
+
+	footer {
+		padding: 4em 0 2em 0;
+		background-color: lightgray;
+		text-align: center;
+		height: 2%;
+	}
+
+		footer .copyright {
+			color: blue;
+			font-size: 0.9em;
+			margin: 0 0 2em 0;
+			padding: 0;
+			text-align: center;
+		}
+
+		@media screen and (max-width: 736px) {
+
+			footer {
+				padding: 3em 0 1em 0;
+			}
+
+		}
+
+
+
+</style>
+
+    <footer>
+	  <p class="copyright">&copy; Vanderlei Dallagnolo</p>
+    </footer>
+	
+  </body>
+</html>

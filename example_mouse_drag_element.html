@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Table with Flexbox</title>
+  <style> 
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Script Kind', sans-serif;
+    }
+
+    .table {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .cell {
+      width: 50%;
+      padding: 10px;
+    }
+
+    .cell:nth-of-type(odd) {
+      background-color: #f2f2f2;
+    }
+
+    .cell:nth-of-type(even) {
+      background-color: #e2e2e2;
+    }
+  </style>
+  
+  <script>
+
+var mousePosition;
+var offset = [0,0];
+var div;
+var isDown = false;
+var vAuxOriginalPositionAttribute;
+var vAuxCellMouseDown;
+
+function fActivateDragCell()
+{
+
+	const cells = document.querySelectorAll(".cell");
+
+
+	for (let i = 0; i < cells.length; i++) {
+		
+		cells[i].addEventListener('mousedown', function(e) {
+		
+			isDown = true;
+			offset = [
+				cells[i].offsetLeft - e.clientX,
+				cells[i].offsetTop - e.clientY
+			];
+		
+			vAuxCellMouseDown = cells[i];
+			}, true);
+		
+	}
+
+	document.addEventListener('mouseup', function() {
+	
+		isDown = false;
+
+		for (let i = 0; i < cells.length; i++) {
+	
+			vAuxCellMouseDown.position  = vAuxOriginalPositionAttribute;
+		
+		}
+	
+	}, true);
+
+	document.addEventListener('mousemove', function(event) {
+		event.preventDefault();
+		if (isDown) {
+			mousePosition = {
+    
+				x : event.clientX,
+				y : event.clientY
+    
+			};
+
+		
+			vAuxCellMouseDown.style.left = (mousePosition.x + offset[0]) + 'px';
+			vAuxCellMouseDown.style.top  = (mousePosition.y + offset[1]) + 'px';
+			vAuxOriginalPositionAttribute = vAuxCellMouseDown.style.position;
+			vAuxCellMouseDown.style.position  = 'absolute';
+			
+		}
+	}, true);
+
+}
+
+</script>
+
+</head>
+<body onload="fActivateDragCell()">
+	<p>Try drag any of the cells with the mouse</p>
+	<p>References:<br>
+	<cite style="font-size: 8px; color: #000000;">
+	Example at the fiddle website:
+	<a href="http://jsfiddle.net/f5EMT/1/" target="blank" >http://jsfiddle.net/f5EMT/1/</a>
+	</cite>
+	</p>
+	<p>Description: this is an example of how to implement the dragging on an element with the mouse in a page. See the source code.
+	</p>
+	<div class="table">
+		<div class="cell" >Cell 1</div>
+		<div class="cell" >Cell 2</div>
+		<div class="cell" >Cell 3</div>
+		<div class="cell" >Cell 4</div>
+		<div class="cell" >Cell 5</div>
+		<div class="cell" >Cell 6</div>
+		<div class="cell" >Cell 7</div>
+		<div class="cell" >Cell 8</div>
+		<div class="cell" >Cell 9</div>
+		<div class="cell" >Cell 10</div>
+	</div>
+</body>
+
+
+
+</html>
