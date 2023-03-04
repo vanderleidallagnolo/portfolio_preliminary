@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Menu Using jsTree</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+	</head>
+	<body>
+		<div id="jstree">
+			<ul>
+				<li>Home
+					<ul>
+						<li>About Us</li>
+						<li>Products
+							<ul>
+								<li>Furniture</li>
+								<li>Electronics</li>
+							</ul>
+						</li>
+						<li>Services</li>
+						<li>Contact Us</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$('#jstree').jstree();
+		});
+		</script>
+	</body>
+</html>

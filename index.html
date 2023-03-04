@@ -87,8 +87,8 @@
 					<ul class="nested">
 					  <li><span class="caret">Javascript</span>
 						<ol class="nested">
-						  <li onclick="fShowContentDetail(SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING);" class="liTreeWithLink" >Mouse dragging element</li>
-						  <li>In development</li>
+						  <li onclick="fShowContentDetail(SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING	);" class="liTreeWithLink" >Mouse dragging element</li>
+						  <li onclick="fShowContentDetail(SCD_START_WEB_JAVASCRIPT_MENUJSTREE		);" class="liTreeWithLink" >Menu JS Tree</li>
 						  <li>In development</li>
 						  <li>In development</li>
 						</ol>
@@ -130,7 +130,8 @@
 				  });
 				}
 
-				const SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING = 0;
+				const SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING	=	0;
+				const SCD_START_WEB_JAVASCRIPT_MENUJSTREE		=	1;
 			
 				function fShowContentDetail(pContentDetailId)
 				{
@@ -139,7 +140,11 @@
 					{
 					
 						case SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING:
-							window.open("example_mouse_drag_element.html");
+							window.open("example_mouse_drag_element.html"	);
+							break;
+												
+						case SCD_START_WEB_JAVASCRIPT_MENUJSTREE:
+							window.open("menu_js_tree_example.html"			);
 							break;
 							
 						default:
