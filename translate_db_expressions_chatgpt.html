@@ -18,6 +18,7 @@ write me and web page with the capability to translate text from portugues to En
           },
           beforeSend: function(xhr){
                 xhr.setRequestHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500');
+            },
           success: function(data) {
             $("#translated-text").text(data.translated_text);
           }
