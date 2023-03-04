@@ -93,7 +93,14 @@
 						  <li>In development</li>
 						</ol>
 					  </li>
-					  <li>In development</li>
+					  <li><span class="caret">Templates</span>
+						<ol class="nested">
+						  <li onclick="fShowContentDetail(SCD_START_WEB_TEMPLATE_LOGINSWANWICH		);" class="liTreeWithLink" >Login with swanwich template</li>
+						  <li>In development</li>
+						  <li>In development</li>
+						  <li>In development</li>
+						</ol>
+					  </li>
 					  <li>In development</li>
 					</ul>
 				  </li>  
@@ -132,6 +139,7 @@
 
 				const SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING	=	0;
 				const SCD_START_WEB_JAVASCRIPT_MENUJSTREE		=	1;
+				const SCD_START_WEB_TEMPLATE_LOGINSWANWICH		=	2;
 			
 				function fShowContentDetail(pContentDetailId)
 				{
@@ -143,8 +151,12 @@
 							window.open("example_mouse_drag_element.html"	);
 							break;
 												
-						case SCD_START_WEB_JAVASCRIPT_MENUJSTREE:
+							case SCD_START_WEB_JAVASCRIPT_MENUJSTREE:
 							window.open("menu_js_tree_example.html"			);
+							break;
+
+							case SCD_START_WEB_TEMPLATE_LOGINSWANWICH:
+							window.open("swanwich_login_example.html"		);
 							break;
 							
 						default:
