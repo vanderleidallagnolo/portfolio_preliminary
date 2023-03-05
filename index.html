@@ -1,36 +1,182 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Utility pages, references and implementation examples</title>
-  </head>
-  <body>
-    <header style="background-color: red;">
-      <h1>Utilities, references and examples of implementations developed by Vanderlei</h1>
-    </header>
-    <nav style="background-color: orange;">
-      <ul>
-        <li><a href="#" onclick="alert('In development');">Home</a></li>
-        <li><a href="#" onclick="alert('In development');">About</a></li>
-        <li><a href="#" onclick="alert('In development');">Contact</a></li>
-      </ul>
-    </nav>
-	
-	<!-- style for the section CONTENTS -->
-	   <style>
-      .flex-container {
-        display: flex;
+    <title>Flexbox Layout</title>
+    <style>
+      * {
+        box-sizing: border-box;
       }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .header {
+        background-color: #f5f1f1;
+        border: 1px solid black;
+        flex: 0.1;
+      }
+
+      .navbar {
+        background-color: #f5f1f1;
+        border: 1px solid black;
+        display: flex;
+        justify-content: flex-start;
+
+
+      }
+
+      .navbar .button {
+            padding: 8px 16px;            
+            margin: 5px;
+            box-shadow: 0px 0px 5px 3px;
+            background: #bf96f5;
+            transition: background-color 0.5s ease;
+        }
+
+        .navbar .button:hover {
+            background: #7f2aee;
+
+        }
+
+      .content {
+        background-color: #f5f1f1;
+        border: 1px solid black;
+        flex: 0.75;
+        display: flex;
+        flex-direction: row;
+      }
+
+             .content .left {
+                    flex: 0.2;
+                    border: 1px solid black;
+                }
+
+                .content .right {
+                    flex: 0.8;
+                    border: 1px solid black;
+                }
+
+      .footer {
+        background-color: #f5f1f1;
+        border: 1px solid black;
+        flex: 0.05;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        color: #0c0b0b;
+      }
+
+            .footer .copyright {
+                color: blue;
+                font-size: 0.9em;
+                margin: 0 0 2em 0;
+                padding: 0;
+                text-align: center;
+            }
+
+            .exclamation { 
+  font-family: 'Font Awesome 5 Free';
+  content: '\f06a';
+  font-weight: 900;
+}
     </style>
-	<!-- style for the section CONTENTS -->
-	
-   <section style="background-color: yellow;">
-   
-      <h2>Contents</h2>
-	  
-      <div class="flex-container">
-	  
-        <div style="background-color: lightblue; width: 20%;">
-		
+<script>
+
+
+function openModalPopUp() {
+
+    let vModal = document.getElementById('modal');
+
+    vModal.style.display = 'block';
+
+}
+
+
+    function fTrataNavbarButtonsOnclick(pButtonClicked)
+    {
+
+        openModalPopUp();
+
+    }
+    //   function fTrataNavbarButtonsOnclick(pButtonClicked)
+
+    function fConfigure()
+    {
+
+        // Grab all buttons in the nav bar
+        const navButtons = document.querySelectorAll('.navbar .button');
+
+        // Add an onclick event listener to each button
+        for (let i = 0; i < navButtons.length; i++) {
+            
+            const button = navButtons[i];
+            button.addEventListener('click', function() {
+
+                fTrataNavbarButtonsOnclick(this);
+
+            });
+
+        }
+
+    }
+    // function fConfigure()
+
+</script>
+
+  </head>
+  <body onload="fConfigure();">
+
+    <style>
+
+            .modal{
+                
+                position: fixed; 
+                z-index: 1; 
+                left: 0; 
+                top: 0; 
+                width: 100%;
+                height: 100%; 
+                overflow: auto;
+                background-color: rgba(0,0,0,0.4);
+                display: none;
+
+            }
+
+    </style>
+
+    <div id="modal" class="modal" >
+        <div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+          <p>In development.
+          <svg width="40" height="40">
+            <circle cx="20" cy="20" r="20" fill="yellow" />
+            <text x="20" y="20" text-anchor="middle" dominant-baseline="central" font-size="20">!</text>
+          </svg>
+        </p>
+          <span class="close" onclick="document.getElementById('modal').style.display='none';">&times;</span>
+ 
+        </div>
+      </div>
+
+
+    <div class="header">
+        <h2>
+            <p>Utilities, references and examples of implementations 
+                developed by Vanderlei Home
+            </p>
+        </h2>
+            
+    </div>
+    <div class="navbar">
+        <div class="button" >Home</div>
+        <div class="button" >About</div>
+        <div class="button" >Log out</div>
+    </div>
+    <div class="content">
+        <div class="left">
 			<!-- Bloco de style do menu treeview -->
 			<style>
 			ul, #myUL {
@@ -188,47 +334,15 @@
 			</script>
 			<!-- bloco de script que permite o funcionamento da função colapsável do menu treeview --> 
 			<!-- FIM -->
-			
         </div>
-        <div style="background-color: #ffcc99; width: 80%;">
-          <p>Click on a content in the menu in the left.</p>
+        <div class="right">
+            <p>Click on an item in the menu on the left.
+            </p>           
+ 
         </div>
-      </div>
-	</section>
-<style>
-
-/* Footer */
-
-	footer {
-		padding: 4em 0 2em 0;
-		background-color: lightgray;
-		text-align: center;
-		height: 2%;
-	}
-
-		footer .copyright {
-			color: blue;
-			font-size: 0.9em;
-			margin: 0 0 2em 0;
-			padding: 0;
-			text-align: center;
-		}
-
-		@media screen and (max-width: 736px) {
-
-			footer {
-				padding: 3em 0 1em 0;
-			}
-
-		}
-
-
-
-</style>
-
-    <footer>
-	  <p class="copyright">&copy; Vanderlei Dallagnolo</p>
-    </footer>
-	
+    </div>
+    <div class="footer">
+        <p class="copyright">&copy; Vanderlei Dallagnolo</p>
+    </div>
   </body>
 </html>
