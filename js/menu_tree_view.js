@@ -8,12 +8,13 @@ for (i = 0; i < toggler.length; i++) {
   });
 }
 
-const SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING				        =	0;
-const SCD_START_WEB_JAVASCRIPT_MENUJSTREE					          =	1;
-const SCD_START_WEB_TEMPLATE_LOGINSWANWICH                  =	2;
-const SCD_START_PROJECTS_ELLEVO_TRANSLATEEPRESSIONSCHATGPT	=	3;
-const SCD_START_PROJECTS_ELLEVO_AUDIT_DB                    =	4;
-const SCD_START_WEB_JAVASCRIPT_DRAG_BORDER					        =	5;
+const SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING				            =	0;
+const SCD_START_WEB_JAVASCRIPT_MENUJSTREE					            =	1;
+const SCD_START_WEB_TEMPLATE_LOGINSWANWICH                              =	2;
+const SCD_START_PROJECTS_ELLEVO_TRANSLATEEPRESSIONSCHATGPT	            =	3;
+const SCD_START_PROJECTS_ELLEVO_AUDIT_DB                                =	4;
+const SCD_START_WEB_JAVASCRIPT_DRAG_BORDER					            =	5;
+const SCD_START_PROJECTS_CCMS_THUMBNAIL_CREATOR					        =	6;
 
 function fShowContentDetail(pContentDetailId)
 {
@@ -38,14 +39,18 @@ function fShowContentDetail(pContentDetailId)
             window.open("translate_db_expressions_chatgpt.html"		);
             break;
 
-case SCD_START_PROJECTS_ELLEVO_AUDIT_DB:
+        case SCD_START_PROJECTS_ELLEVO_AUDIT_DB:
             window.open("audit_db.html"		);
             break;
             
-case SCD_START_WEB_JAVASCRIPT_DRAG_BORDER:
+        case SCD_START_WEB_JAVASCRIPT_DRAG_BORDER:
             window.open("div_handler_drag_border.html"		);
             break;
-            
+
+        case SCD_START_PROJECTS_CCMS_THUMBNAIL_CREATOR:
+            window.open("thumbnail_creator.html"		);
+            break;
+                        
         default:
             break;
     

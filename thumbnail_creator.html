@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thumbnail generator</title>
+    <style>
+        /* Use flexbox to create a layout with four sections */
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            /* Header section contains title and main menu */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: lightblue;
+            padding: 10px;
+        }
+
+        .menu {
+            /* Main menu is a list of links */
+            display: flex;
+            list-style: none;
+        }
+
+        .menu li {
+            /* Each link has some margin and padding */
+            margin: 0 10px;
+            padding: 5px 10px;
+        }
+
+        .menu li a {
+            /* Remove the default underline from links */
+            text-decoration: none;
+        }
+
+        .buttons {
+            /* Buttons section contains a set of five buttons */
+            display: flex;
+            justify-content: center;
+            background-color: lightgreen;
+            padding: 10px;
+        }
+
+        .buttons button {
+             /* Each button has some margin and padding */
+             margin: 0 10px; 
+             padding: 10px 20px; 
+         }
+
+         main {
+             /* Main section occupies 80% of the screen area and shows the thumbnail in editing */
+             display:flex; 
+             align-items:center; 
+             justify-content:left; 
+             background-color:white; 
+             flex-grow :1; 
+         }
+
+         main img { 
+              /* The image is centered and has some border */ 
+              border :5px solid black; 
+          } 
+
+            .draggable {
+              width: 5%;
+              height: 100%;
+              background-color: lightblue;
+
+              left: 0;
+              top: 0;
+            }
+
+            .handler {
+              width: 10px;
+              height: 100%;
+              background-color: darkblue;
+              position: relative;
+              right: -100%; /* half of the handler's width */
+              top: 0;
+              cursor: ew-resize; /* change the cursor shape */
+            }
+
+            .col4 {
+              width: 85%;
+              background-color: gray;
+              margin-left: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+  
+
+          footer { 
+               /* Footer section contains copyright info */
+               display:flex; 
+               align-items:center; 
+               justify-content:center; 
+               background-color :lightgray; 
+               padding :10px;  
+           }
+    </style>
+	
+	<script>
+	
+	// representa um status da página que acabou de carregar e está se configurando
+	const ON_LOAD_CONFIGURING = 0;
+	const ON_AFTER_LOAD = 1;
+	class PageStatusClass {
+		constructor(pstatus) {
+		this.pstatus = pstatus;
+	}
+
+		//sayHello() {
+		//	console.log(`Hello, ${this.name}!`);
+		//}
+	}
+	var myPageStatus = new PageStatusClass(ON_LOAD_CONFIGURING);
+	
+	var myProjectLayers = null;
+	
+// A class that has name, id and level attributes
+class ProjectLayer {
+  // A parameterless constructor that sets default values for the attributes
+  constructor() {
+    // Set the name to an empty string
+    this.name = "";
+    // Set the id to zero
+    this.id = 0;
+    // Set the level to one
+    this.level = 1;
+	
+	this.childlayer = null;
+  }
+
+  // A getter method for the name attribute
+  getName() {
+    // Return the name value
+    return this.name;
+  }
+
+  // A setter method for the name attribute
+  setName(name) {
+    // Assign the name parameter to the instance variable
+    this.name = name;
+  }
+
+  // A getter method for the id attribute
+     getId() {
+    // Return the id value
+    return this.id;
+  }
+
+  // A setter method for the id attribute
+     setId(id) {
+    // Assign the id parameter to the instance variable
+    this.id = id;
+  }
+
+  // A getter method for the level attribute
+     getLevel() {
+    // Return the level value
+    return this.level;
+  }
+
+  // A setter method for the level attribute
+     setLevel(level) {
+    // Assign the level parameter to the instance variable
+    this.level = level;
+  }
+  
+  // A getter method for the level attribute
+     getChildlayer() {
+    // Return the level value
+    return this.childlayer;
+  }
+
+  // A setter method for the level attribute
+     setChildlayer(childlayer) {
+    // Assign the level parameter to the instance variable
+    this.childlayer = childlayer;
+  }
+  
+  addLayer(
+	pNome
+,	pid
+,	pLevel
+, 	pChildLayer)
+{
+
+	this.setName(pNome);
+	this.setId(pid);
+	this.setLevel(pLevel);
+	this.setChildlayer(pChildLayer);
+
+}
+
+}
+
+	
+	function fAddBackground(pStatus)
+	{
+	
+		if (pStatus == ON_LOAD_CONFIGURING) return false;
+			
+		// Get the main element by its tag name
+		var main = document.getElementsByTagName("main")[0];
+
+		// Remove all the child nodes of the main element
+		while (main.firstChild) {
+			main.removeChild(main.firstChild);
+		}
+
+		// Create a new div element with the name layer_background
+		var div = document.createElement("div");
+		div.setAttribute("id", "layer_background");
+
+		// Set the style of the div to occupy all the area of the main section
+		div.style.width = "100%";
+		div.style.height = "100%";
+		div.style.backgroundColor  = "yellow";
+
+		// Append the div as a child of the main element
+		main.appendChild(div);
+		
+		myProjectLayers.addLayer("layer_background", div.id, 0, null);				
+			
+	}
+	
+	function fAddLayer(pStatus)
+	{
+	
+		if (pStatus == ON_LOAD_CONFIGURING) return false;
+			
+		// Get the layer background element by its name
+		var layerBackground = document.getElementsByName("layer_background")[0];
+
+		// Check if the layer background element exists
+		if (layerBackground) {
+			// If it exists, prompt to the user that it already exists
+			alert("Layer background already exists.");
+		} else {
+			// If it does not exist, prompt to the user that it does not exist
+			alert("Layer background does not exist.");
+		}			
+	}
+	
+	
+	function configure(pStatus)
+	{
+	
+		myPageStatus.pstatus = pStatus; 
+		myProjectLayers = new ProjectLayer();
+	
+/* ###################################################################################################
+
+	ADD BACKGROUND 
+	
+*/
+			// Get the button element by its id
+			var button = document.getElementById("add-background");
+			
+			// Add an event listener to the button
+			button.addEventListener("click", function() {
+				fAddBackground(myPageStatus.pstatus);
+			});
+			
+/* ###################################################################################################
+
+	END ADD BACKGROUND 
+	
+*/
+
+			
+/* ###################################################################################################
+
+	ADD LAYER 
+	
+*/
+			// Get the add layer button element by its id
+			var addLayerButton = document.getElementById("add-layer");
+
+			// Add an event listener to the add layer button
+			addLayerButton.addEventListener("click", function() {
+				fAddLayer(myPageStatus.pstatus);
+			});
+
+/* ###################################################################################################
+
+	END LAYER 
+	
+*/
+	
+			
+	}
+	// function  configure
+	
+	
+
+	
+	</script>
+	
+	
+</head>
+<body onload="configure(ON_AFTER_LOAD);" >
+    <div class="container">
+        <!-- Header section -->
+        <header>
+           <h1>Thumbnail generator</h1> <!-- Title -->
+           <ul class="menu"> <!-- Main menu -->
+               <li><a href="#">Home</a></li>
+               <li><a href="#">About</a></li>
+               <li><a href="#">Contact</a></li>
+           </ul>
+       </header>
+
+       <!-- Buttons section -->
+       <div class="buttons">
+           <!-- Five buttons for uploading, editing and saving thumbnails -->
+           <button>Upload</button>
+           <button>Crop</button>
+           <button>Rotate</button>
+           <button>Filter</button>
+           <button>Save</button>
+		   <button id="add-background" >Add background</button>
+		   <button id="add-layer">Add layer</button>
+       </div>
+
+       <!-- Main section -->
+       <main>
+		  
+          <div id="draggable" class="draggable">
+          
+            <div id="handler" class="handler"></div> <!-- this is a child div that acts as a handler -->
+      
+          </div>
+        
+          <div class="col4">
+              
+            <!-- The image to be edited as a thumbnail -->
+              <img src="https://www.bing.com/th?id=OIP.9Y7Zf0gX4mL2QaQn3w7z6AHaHa&w=200&h=200&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" alt="Bing logo">
+ 
+          </div>
+
+			
+      </main>
+
+      <!-- Footer section -->
+      <footer>  
+          <!-- Copyright info -->
+          &copy; Thumbnail generator - All rights reserved
+      </footer>
+
+   </div>
+
+</body>
+
+```
