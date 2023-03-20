@@ -1,0 +1,100 @@
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    background-color: #f5f1f1;
+    border: 1px solid black;
+    flex: 0.1;
+  }
+
+  .navbar {
+    background-color: #f5f1f1;
+    border: 1px solid black;
+    display: flex;
+    justify-content: flex-start;
+
+
+  }
+
+  .navbar .button {
+        padding: 8px 16px;            
+        margin: 5px;
+        box-shadow: 0px 0px 5px 3px;
+        background: #bf96f5;
+        transition: background-color 0.5s ease;
+    }
+
+    .navbar .button:hover {
+        background: #7f2aee;
+
+    }
+
+  .content {
+    background-color: #f5f1f1;
+    border: 1px solid black;
+    flex: 0.75;
+    display: flex;
+    flex-direction: row;
+  }
+
+         .content .left {
+                flex: 1%;
+                border: 1px solid black;
+                display: flex;
+            }
+
+                .draggable {
+                    border: 1px solid orange;
+                    width: 100%;
+                }
+
+                .handler {
+                    width: 10px;
+                    /* height: 100%; */
+                    background-color: darkblue;
+                    position: relative;
+                     right: 0; /*half of the handler's width */
+                     left: 0;
+                    /* top: 0; */
+                    cursor: ew-resize; /* change the cursor shape */
+                }
+
+        .content .right {
+            flex: 99%;
+            border: 1px solid black;
+            /* margin-left: 10px; */
+        }
+
+  .footer {
+    background-color: #f5f1f1;
+    border: 1px solid black;
+    flex: 0.05;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: #0c0b0b;
+  }
+
+        .footer .copyright {
+            color: blue;
+            font-size: 0.9em;
+            margin: 0 0 2em 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .exclamation { 
+            font-family: 'Font Awesome 5 Free';
+            content: '\f06a';
+            font-weight: 900;
+        }

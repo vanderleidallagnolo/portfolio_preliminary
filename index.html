@@ -1,89 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Portfolio Repository</title>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      .header {
-        background-color: #f5f1f1;
-        border: 1px solid black;
-        flex: 0.1;
-      }
 
-      .navbar {
-        background-color: #f5f1f1;
-        border: 1px solid black;
-        display: flex;
-        justify-content: flex-start;
+    <link rel="stylesheet" href="css/menu_tree_view.css">
+    <link rel="stylesheet" href="css/main.css">
 
+     <title>Portfolio Repository</title>
 
-      }
-
-      .navbar .button {
-            padding: 8px 16px;            
-            margin: 5px;
-            box-shadow: 0px 0px 5px 3px;
-            background: #bf96f5;
-            transition: background-color 0.5s ease;
-        }
-
-        .navbar .button:hover {
-            background: #7f2aee;
-
-        }
-
-      .content {
-        background-color: #f5f1f1;
-        border: 1px solid black;
-        flex: 0.75;
-        display: flex;
-        flex-direction: row;
-      }
-
-             .content .left {
-                    flex: 0.2;
-                    border: 1px solid black;
-                }
-
-                .content .right {
-                    flex: 0.8;
-                    border: 1px solid black;
-                }
-
-      .footer {
-        background-color: #f5f1f1;
-        border: 1px solid black;
-        flex: 0.05;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        color: #0c0b0b;
-      }
-
-            .footer .copyright {
-                color: blue;
-                font-size: 0.9em;
-                margin: 0 0 2em 0;
-                padding: 0;
-                text-align: center;
-            }
-
-            .exclamation { 
-  font-family: 'Font Awesome 5 Free';
-  content: '\f06a';
-  font-weight: 900;
-}
-    </style>
 <script>
 
 
@@ -176,171 +99,92 @@ function openModalPopUp() {
         <div class="button" >Log out</div>
     </div>
     <div class="content">
+
         <div class="left">
-			<!-- Bloco de style do menu treeview -->
-			<style>
-			ul, #myUL {
-			  list-style-type: none;
-			}
-			
-			#myUL {
-			  margin: 0;
-			  padding: 0;
-			}
 
-			.caret {
-			  cursor: pointer;
-			  -webkit-user-select: none; /* Safari 3.1+ */
-			  -moz-user-select: none; /* Firefox 2+ */
-			  -ms-user-select: none; /* IE 10+ */
-			  user-select: none;
-			}
+          <div id="draggable" class="draggable">
+              <!-- começa o menu treeview --> 
+              <ul id="myUL">
+                
+                  <li><span class="caret">Start</span>
 
-			.caret::before {
-			  content: "\25B6";
-			  color: black;
-			  display: inline-block;
-			  margin-right: 6px;
-			}
+                      <ul class="nested">
 
-			.caret-down::before {
-			  -ms-transform: rotate(90deg); /* IE 9 */
-			  -webkit-transform: rotate(90deg); /* Safari */'
-			  transform: rotate(90deg);  
-			}
+                          <li><span class="caret">Web</span>
+                            <ul class="nested">
+                                <li><span class="caret">Javascript</span>
+                                    <ol class="nested">
+                                        <li onclick="fShowContentDetail(SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING	);" class="liTreeWithLink" >Mouse dragging element</li>
+                                        <li onclick="fShowContentDetail(SCD_START_WEB_JAVASCRIPT_MENUJSTREE		  );" class="liTreeWithLink" >Menu JS Tree</li>
+                                        <li onclick="fShowContentDetail(SCD_START_WEB_JAVASCRIPT_DRAG_BORDER		);" class="liTreeWithLink" >Div handler - resize div dragging border</li>
+                                        <li>In development</li>
+                                    </ol>
+                                </li>
+                                <li><span class="caret">Templates</span>
+                                    <ol class="nested">
+                                        <li onclick="fShowContentDetail(SCD_START_WEB_TEMPLATE_LOGINSWANWICH		);" class="liTreeWithLink" >Login with swanwich template</li>
+                                        <li>In development</li>
+                                        <li>In development</li>
+                                        <li>In development</li>
+                                    </ol>
+                                </li>
+                                <li>In development</li>
+                            </ul>
+                          </li>
+                          <!-- web -->
 
-			.nested {
-			  display: none;
-			}
+                          <li>Business</li>
+                          <!-- Business -->
 
-			.active {
-			  display: block;
-			}
-			
-			.liTreeWithLink {
-			
-				cursor: pointer;
-				
-			}
-			</style>
-			<!-- bloco de style do menu treeview -->
+                          <li><span class="caret">Projects</span>
+                              <ul class="nested">
+                                  <li><span class="caret">Cerva Show</span>
+                                      <ol class="nested">
+                                        <li>Site</li>
+                                        <li>Classificação de cerveja</li>
+                                        <li>To be released</li>
+                                        <li>To be released</li>
+                                      </ol>
+                                  </li>
+                              </ul>
+                          </li>
+                          <!-- Projects -->
 
-			<!-- começa o menu treeview --> 
-			<ul id="myUL">
-			  <li><span class="caret">Start</span>
-				<ul class="nested">
-				  <li><span class="caret">Web</span>
-					<ul class="nested">
-					  <li><span class="caret">Javascript</span>
-						<ol class="nested">
-						  <li onclick="fShowContentDetail(SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING	);" class="liTreeWithLink" >Mouse dragging element</li>
-						  <li onclick="fShowContentDetail(SCD_START_WEB_JAVASCRIPT_MENUJSTREE		);" class="liTreeWithLink" >Menu JS Tree</li>
-						  <li>In development</li>
-						  <li>In development</li>
-						</ol>
-					  </li>
-					  <li><span class="caret">Templates</span>
-						<ol class="nested">
-						  <li onclick="fShowContentDetail(SCD_START_WEB_TEMPLATE_LOGINSWANWICH		);" class="liTreeWithLink" >Login with swanwich template</li>
-						  <li>In development</li>
-						  <li>In development</li>
-						  <li>In development</li>
-						</ol>
-					  </li>
-					  <li>In development</li>
-					</ul>
-				  </li>  
-				  <li>Business</li>
-				  <li><span class="caret">Projects</span>
-					<ul class="nested">
-					  <li><span class="caret">Cerva Show</span>
-						<ol class="nested">
-						  <li>Site</li>
-						  <li>Classificação de cerveja</li>
-						  <li>To be released</li>
-						  <li>To be released</li>
-						</ul>
-					  </li>
-					  <li><span class="caret">Ellevo</span>
-						<ol class="nested">
-							<li onclick="fShowContentDetail(SCD_START_PROJECTS_ELLEVO_TRANSLATEEPRESSIONSCHATGPT		);" class="liTreeWithLink" >Translate database expressions using ChatGPT</li>
-							<li onclick="fShowContentDetail(SCD_START_PROJECTS_ELLEVO_AUDIT_DB							);" class="liTreeWithLink" >Audit DB - normal forms etc</li>
-							<li>To be released</li>
-						  <li>To be released</li>
-						</ul>
-					  </li>
-					  <li>To be released</li>
-					</ul>
-				  </li>  
-				</ul>
-			  </li>
-			</ul>
-			<!-- termina o menu treeview -->
+                          <li><span class="caret">Ellevo</span>
+                            <ol class="nested">
+                                <li onclick="fShowContentDetail(SCD_START_PROJECTS_ELLEVO_TRANSLATEEPRESSIONSCHATGPT		);" class="liTreeWithLink" >Translate database expressions using ChatGPT</li>
+                                <li onclick="fShowContentDetail(SCD_START_PROJECTS_ELLEVO_AUDIT_DB							);" class="liTreeWithLink" >Audit DB - normal forms etc</li>
+                                <li>To be released</li>
+                                <li>To be released</li>
+                            </ol>
+                        </li>
+                        <!-- Ellevo -->
 
-			<!-- bloco de script que permite o funcionamento da função colapsável do menu treeview -->
-			<script>
-			
-				var toggler = document.getElementsByClassName("caret");
-				var i;
+                    </ul>
+                </li>
 
-				for (i = 0; i < toggler.length; i++) {
-				  toggler[i].addEventListener("click", function() {
-					this.parentElement.querySelector(".nested").classList.toggle("active");
-					this.classList.toggle("caret-down");
-				  });
-				}
+              </ul>
+              <!-- fim do mneu -->
 
-				const SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING				=	0;
-				const SCD_START_WEB_JAVASCRIPT_MENUJSTREE					=	1;
-				const SCD_START_WEB_TEMPLATE_LOGINSWANWICH					=	2;
-				const SCD_START_PROJECTS_ELLEVO_TRANSLATEEPRESSIONSCHATGPT	=	3;
-				const SCD_START_PROJECTS_ELLEVO_AUDIT_DB					=	4;
-			
-				function fShowContentDetail(pContentDetailId)
-				{
-				
-					switch(pContentDetailId)
-					{
-					
-						case SCD_START_WEB_JAVASCRIPT_MOUSEDRAGGING:
+          </div>
 
-							window.open("example_mouse_drag_element.html"	);
-							break;
-												
-						case SCD_START_WEB_JAVASCRIPT_MENUJSTREE:
-							window.open("menu_js_tree_example.html"			);
-							break;
+          <div id="handler" class="handler"></div> <!-- this is a child div that acts as a handler -->
+          <script src="js/drag_handler.js"></script>
 
-						case SCD_START_WEB_TEMPLATE_LOGINSWANWICH:
-							window.open("swanwich_login_example.html"		);
-							break;
-
-						case SCD_START_PROJECTS_ELLEVO_TRANSLATEEPRESSIONSCHATGPT:
-							window.open("translate_db_expressions_chatgpt.html"		);
-							break;
-
-						case SCD_START_PROJECTS_ELLEVO_AUDIT_DB:
-							window.open("audit_db.html"		);
-							break;
-							
-						default:
-							break;
-					
-					}
-					// end switch(pContentDetailId)				
-				}
-				// function fShowContentDetail(pContentDetailId)
-			
-			</script>
-			<!-- bloco de script que permite o funcionamento da função colapsável do menu treeview --> 
-			<!-- FIM -->
         </div>
+        <!-- div class="left">-->
+
         <div class="right">
             <p>Click on an item in the menu on the left.
             </p>           
  
         </div>
+
     </div>
+
+    <!-- carrega as funções de script -->
+    <script src="js/menu_tree_view.js"></script>
+
     <div class="footer">
         <p class="copyright">&copy; Vanderlei Dallagnolo</p>
     </div>

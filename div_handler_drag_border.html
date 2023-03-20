@@ -1,0 +1,288 @@
+<html>
+<head>
+<style>
+/* Use flexbox to create rows */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Use the full viewport height */
+}
+
+/* Assign heights to each row */
+.row1 {
+  height: 5%;
+  background-color: lightblue;
+}
+
+.row2 {
+  height: 5%;
+  background-color: lightgreen;
+}
+
+.row3 {
+  height: 80%;
+  background-color: lightpink;
+}
+
+.row4 {
+  height: 10%;
+  background-color: lightyellow;
+}
+
+/* Use flexbox to create columns in the main content area */
+.main-content {
+  display: flex;
+}
+
+/* Assign widths to each column */
+.col1 {
+  width: 5%;
+  background-color: orange;
+}
+
+      .border-handle1 {
+        /*position: absolute;*/
+        width: 5px;
+        height: 100%;
+        background-color: blue;
+        opacity: 0.5;
+        cursor: ew-resize;
+      }
+	  
+      .border-handle2 {
+        /*position: absolute;*/
+        width: 5px;
+        height: 100%;
+        background-color: blue;
+        opacity: 0.5;
+        cursor: ew-resize;
+      }
+	  
+      .border-handle3 {
+        /*position: absolute;*/
+		/* display: inline-block; */
+        width: 5px;
+        height: 99%;
+        background-color: red;
+        opacity: 0.5;
+        cursor: ew-resize;
+		
+      }
+	  overflow-x:hidden;
+	   .border-handle.right {
+        /*right: -10px;*/
+      }
+
+.col2 {
+  width: 5%;
+  background-color: purple;
+}
+
+.col3 {
+  width: 5%;
+  background-color: green;
+}
+
+.col4 {
+  width: 85%;
+  background-color: gray;
+  margin-left: 10px;
+}
+
+/* Use resizable property to allow changing widths by dragging borders */
+.resizable {
+    overflow-x:hidden; /* Prevent scrollbars from appearing */
+    /*resize:horizontal;*/ /* Allow resizing both horizontally and vertically */
+}
+
+  .draggable {
+    width: 5%;
+    height: 100%;
+    background-color: lightblue;
+
+    left: 0;
+    top: 0;
+  }
+
+  .handler {
+    width: 10px;
+    height: 100%;
+    background-color: darkblue;
+    position: relative;
+    right: -100%; /* half of the handler's width */
+    top: 0;
+    cursor: ew-resize; /* change the cursor shape */
+  }
+  
+  .respiro {
+    width: 10px;
+    height: 100%;
+    background-color: orange;
+    position: relative;
+    left: 0; /* half of the handler's width */
+    top: 0;
+    cursor: ew-resize; /* change the cursor shape */
+  }
+  
+</style>
+
+
+
+</head>
+<body>
+<div class="container">
+    <div class="row1">Row1</div>
+    <div class="row2">Row2</div>
+    <div class="row3 main-content">
+	
+        <div class="col1 resizable">Col1</div>
+		<div class="border-handle1 right"></div>
+		
+        <div class="col2 resizable">Col2</div>
+		<div class="border-handle2 right"></div>
+		
+		<div id="draggable" class="draggable">
+		
+			<div id="handler" class="handler"></div> <!-- this is a child div that acts as a handler -->
+
+		</div>
+			
+        <div class="col4"	>
+			<p >	<= Drag this collumn to resize</p>
+		</div>
+    </div>
+    <div class="row4">Row4</div>
+</div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+	  
+        var isDragging = false;
+        var currentHandle;
+		
+		var draggable = document.getElementById("draggable");
+		var handler = document.getElementById("handler");
+		
+		// initialize some variables
+		var dragging = false; // whether the handler is being dragged
+		var startX = null; // the initial x position of the mouse when dragging starts
+		var startWidth = null; // the initial width of the draggable element when dragging starts
+		
+		var vAuxHandlerWidth = null; // auxiliary variable that serves to keep the width of the handler
+		// in some processes such measure is used to correctly reposition the handler;
+		
+		// add an event listener for mousedown on the handler
+		handler.addEventListener("mousedown", function(event) {
+		  // prevent default behavior
+		  event.preventDefault();
+		  
+		  // set the dragging flag to true
+		  dragging = true;
+
+		  // store the initial x position of the mouse and the initial width of the draggable element
+		  startX = event.clientX;
+		  startWidth = parseInt(window.getComputedStyle(draggable).width);
+		});
+        
+        var borderHandles1 = document.querySelectorAll('.border-handle1');
+        var borderHandles2 = document.querySelectorAll('.border-handle2');
+        //var container = document.querySelector('.draggable');
+        var container1 = document.querySelector('.col1');
+        var container2 = document.querySelector('.col2');
+		
+        var containerOffset1 = container1.getBoundingClientRect();
+        var containerOffset2 = container2.getBoundingClientRect();
+		
+        var containerLeft1 = containerOffset1.left;
+        var containerLeft2 = containerOffset2.left;
+        var containerWidth1 = container1.offsetWidth;
+        var containerWidth2 = container2.offsetWidth;
+        
+        //for (var i = 0; i < borderHandles.length; i++) {
+          borderHandles1[0].addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            isDragging = true;
+            currentHandle = this;
+          });
+          borderHandles2[0].addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            isDragging = true;
+            currentHandle = this;
+          });
+        //}
+        
+        document.addEventListener('mousemove', function(e) {
+		
+			if (dragging) { // only execute if dragging is true
+			
+			 // calculate how much the mouse has moved horizontally since dragging started
+			 var deltaX = event.clientX - startX;
+
+			 // calculate and set the new width of the draggable element based on deltaX and startWidth
+			 var newWidth = startWidth + deltaX;
+
+			 // constrain newWidth to be within [0, container's width]
+			 newWidth = Math.max(0, Math.min(newWidth, window.innerWidth));
+
+			 draggable.style.width = newWidth + "px";
+			 handler.style.right = "-100%";
+			//handler.style.left = newWidth + "px";
+			//handler.style.left = event.clientX;
+			 
+			 console.log(draggable.style.left);
+			 console.log(handler.style.left);
+			 
+			 console.log("...");
+			 
+			 console.log(draggable.style.right);
+			 console.log(handler.style.right);
+			 
+			 console.log("...");
+			 
+		   }
+		
+		
+          if (!isDragging) {
+            return;
+          }
+          
+          var mouseX = e.pageX;
+          var handleOffset = currentHandle.getBoundingClientRect();
+          var handleLeft = handleOffset.left;
+          
+		if (currentHandle.classList.contains('border-handle1')) {
+            var newWidth = mouseX - containerLeft1;
+            container1.style.width = mouseX + 'px';
+          }
+		if (currentHandle.classList.contains('border-handle2')) {
+            var newWidth = mouseX - containerLeft2;
+            container2.style.width = mouseX + 'px';
+          }
+		  
+		  
+
+		   
+        });
+        
+        document.addEventListener('mouseup', function() {
+          isDragging = false;
+          currentHandle = null;
+		  
+		     if (dragging) { // only execute if dragging is true
+    
+				 // set dragging flag to false 
+				 dragging = false;
+
+				 // reset startX and startWidth to null 
+				 startX = null; 
+				 startWidth = null; 
+				 
+			}
+		  
+        });
+      });
+    </script>
+
+
+</body>
+</html>
