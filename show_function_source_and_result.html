@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left-section {
+            width: 30%;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .right-section {
+            width: 70%;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 10px;
+            text-decoration: none; 
+        }
+
+        li a:hover {
+           background-color:#ddd; 
+           cursor:pointer; 
+       }
+       
+       input{
+           width :100%;
+           height :30px; 
+       }
+       
+       textarea{
+           width :100%;
+           height :135px; 
+       }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Show source and result of javascript functions</h1>
+</header>
+
+<main>
+    <div class="left-section">
+      <ul id="links">
+        <li><a function-alias="Do something"    function-name="doSomething"     >Do something</a></li>
+        <li><a function-alias="Two something"   function-name="twosomething"    >Two something</a></li>
+    </ul>  
+    </div>
+
+    <div class="right-section">
+      <input    id="functionAlias"  placeholder="Function name"     readonly    />
+      <textarea id="functionSource" placeholder="Function source"   readonly    ></textarea>  
+      <textarea id="functionResult" placeholder="Function result"   readonly    ></textarea>  
+    </div>
+
+<script>
+    // Get the elements
+    var links = document.getElementById("links");
+    var functionAlias   = document.getElementById("functionAlias"   );
+    var functionSource  = document.getElementById("functionSource"  );
+    var functionResult  = document.getElementById("functionResult"  );
+    
+
+    // Add an event listener to the links
+    links.addEventListener("click", function(event) {
+
+      // Get the target element
+      var target = event.target;
+
+      // Check if it is a link
+      if (target.tagName === "A") {
+
+         // Get the data attribute values
+         var vfunctionAlias  = target.getAttribute("function-alias"  );
+         var vfunctionSource = target.getAttribute("function-name"   );
+         var vfunctionResult = "";
+
+         // Set the input and textarea values
+        functionAlias.value     =   vfunctionAlias      ;
+        functionSource.value    =   window[vfunctionSource].toString();
+
+        let funcvar;
+        funcvar = window[vfunctionSource];
+        functionResult.value    =   funcvar(5,6);  
+
+      }
+
+            
+   });
+
+   
+   function doSomething() {
+            // For example, alert a message
+            alert("Hello from doSomething!");
+        }
+   
+   
+        function twosomething(p1, p2) {
+            // For example, alert a message
+            return p1 + p2;
+        }
+   
+
+</script>
+
+</body>
+</html>
