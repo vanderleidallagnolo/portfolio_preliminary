@@ -73,13 +73,15 @@
 <main>
     <div class="left-section">
       <ul id="links">
-        <li><a function-alias="Do something"    function-name="doSomething"     >Do something</a></li>
-        <li><a function-alias="Two something"   function-name="twosomething"    >Two something</a></li>
+        <li><a function-alias="Do something"    function-name="doSomething"         >Do something</a></li>
+        <li><a function-alias="Two something"   function-name="twosomething"        >Two something</a></li>
+        <li><a function-alias="Null something"  function-name="null"                >Null something</a></li>
     </ul>  
     </div>
 
     <div class="right-section">
       <input    id="functionAlias"  placeholder="Function name"     readonly    />
+      <input    id="functionCall"   placeholder="Function call"     readonly    />
       <textarea id="functionSource" placeholder="Function source"   readonly    ></textarea>  
       <textarea id="functionResult" placeholder="Function result"   readonly    ></textarea>  
     </div>
@@ -88,6 +90,7 @@
     // Get the elements
     var links = document.getElementById("links");
     var functionAlias   = document.getElementById("functionAlias"   );
+    var functionCall    = document.getElementById("functionCall"    );
     var functionSource  = document.getElementById("functionSource"  );
     var functionResult  = document.getElementById("functionResult"  );
     
@@ -102,23 +105,80 @@
       if (target.tagName === "A") {
 
          // Get the data attribute values
-         var vfunctionAlias  = target.getAttribute("function-alias"  );
-         var vfunctionSource = target.getAttribute("function-name"   );
-         var vfunctionResult = "";
+         var vfunctionAlias     = target.getAttribute("function-alias"  );
+         var vfunctionCall      = "";
+         var vfunctionSource    = target.getAttribute("function-name"   );
+         var vfunctionResult    = "";
+
+         vfunctionCall          = fRetornaParmFunction(vfunctionSource);
+         //vfunctionCall          =   vfunctionCall == ""
 
          // Set the input and textarea values
-        functionAlias.value     =   vfunctionAlias      ;
-        functionSource.value    =   window[vfunctionSource].toString();
+        functionAlias.value     =   vfunctionAlias                                              ;
+        functionCall.value      =   vfunctionCall    ==  null    ?   ARR_PARM_FUNCAO_INVALIDA   :  vfunctionSource + "("+vfunctionCall.join(",") +");"     ; 
+        functionSource.value    =   vfunctionCall    ==  null    ?   ARR_PARM_FUNCAO_INVALIDA   :  window[vfunctionSource].toString()                      ;
 
         let funcvar;
         funcvar = window[vfunctionSource];
-        functionResult.value    =   funcvar(5,6);  
+
+        let result = 0;
+        try {
+
+            if (vfunctionCall   ==  null)
+            {
+                functionResult.value    =   ARR_PARM_FUNCAO_INVALIDA;
+            }
+            else
+            {
+                functionResult.value    =  funcvar.apply(null, vfunctionCall);  ; // this function is not defined
+            }
+
+        } catch (e) {
+            functionResult.value = "Exceção ao executar a função:\n"; 
+            functionResult.value = functionResult.value +   e.message; 
+        } finally {
+            //functionResult.value = functionResult.value + "\nfinally";
+        }
+            
+        //functionResult.value    =   funcvar(5,6);  
 
       }
 
             
    });
 
+   function fRetornaParmFunction(pFunctionName)
+   {
+
+    
+        switch (pFunctionName)
+        {
+            case "doSomething":
+
+                return ARR_PARM_FUNCTION_1;
+                break;
+
+            case "twosomething":
+
+                return ARR_PARM_FUNCTION_2;
+                break;
+
+            default:
+
+                return null;
+                break;
+
+
+        }
+
+
+   }
+   //function fRetornaParmFunction()
+
+   const ARR_PARM_FUNCAO_INVALIDA   =   "FUNÇÃO INVÁLIDA";
+
+   const ARR_PARM_FUNCTION_1 = []; // this value means "" not null 
+   const ARR_PARM_FUNCTION_2 = [5, "XYZ"];
    
    function doSomething() {
             // For example, alert a message
@@ -126,9 +186,14 @@
         }
    
    
-        function twosomething(p1, p2) {
+    function twosomething(p1, p2) {
             // For example, alert a message
-            return p1 + p2;
+
+            let vp1 =   p1;
+            let vp2 =   p2;
+            
+            return vp1 + vp2;
+
         }
    
 
