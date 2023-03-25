@@ -73,9 +73,12 @@
 <main>
     <div class="left-section">
       <ul id="links">
-        <li><a function-alias="Do something"    function-name="doSomething"         >Do something</a></li>
-        <li><a function-alias="Two something"   function-name="twosomething"        >Two something</a></li>
-        <li><a function-alias="Null something"  function-name="null"                >Null something</a></li>
+        <li><a function-alias="Return Negative"             function-name="makeNegative_v1"           function-call-needspreadsyntax="false"           >Return Negative v. 1</a></li>
+        <li><a function-alias="Smallest Integer Finder"     function-name="smallestIntegerFinder_v1"  function-call-needspreadsyntax="false"           >Find the smallest integer in the array v. 1</a></li>
+        <li><a function-alias="Grasshopper Summation"       function-name="summation_v1"              function-call-needspreadsyntax="false"           >Summation v. 1</a></li>
+        <li><a function-alias="Get the mean of an Array"    function-name="getAverage_v1"             function-call-needspreadsyntax="false"           >Get the mean of an array v. 1</a></li>
+        <li><a function-alias="Rock, Paper and Scissors"    function-name="rps_v1"                    function-call-needspreadsyntax="true"           >Rock, Paper and Scissors v. 1</a></li>
+        <li><a function-alias="Null something"              function-name="null"                      function-call-needspreadsyntax="false"           >Null something</a></li>
     </ul>  
     </div>
 
@@ -109,6 +112,8 @@
          var vfunctionCall      = "";
          var vfunctionSource    = target.getAttribute("function-name"   );
          var vfunctionResult    = "";
+         var vfunctionCallNeedspreadSyntax  = target.getAttribute("function-call-needspreadsyntax"  );
+         vfunctionCallNeedspreadSyntax = vfunctionCallNeedspreadSyntax === 'true' ? true : false;
 
          vfunctionCall          = fRetornaParmFunction(vfunctionSource);
          //vfunctionCall          =   vfunctionCall == ""
@@ -130,7 +135,15 @@
             }
             else
             {
-                functionResult.value    =  funcvar.apply(null, vfunctionCall);  ; // this function is not defined
+
+                if (vfunctionCallNeedspreadSyntax)
+                {
+                    functionResult.value    =  funcvar.apply(null, ...[vfunctionCall]);
+                }
+                else
+                {
+                    functionResult.value    =  funcvar.apply(null, [vfunctionCall]);
+                }
             }
 
         } catch (e) {
@@ -153,20 +166,36 @@
     
         switch (pFunctionName)
         {
-            case "doSomething":
+            case "makeNegative_v1"                     :
 
-                return ARR_PARM_FUNCTION_1;
+                return ARR_PARM_FUNCTION_MAKE_NEGATIVE_1                    ;
                 break;
 
-            case "twosomething":
+            case "smallestIntegerFinder_v1"            :
 
-                return ARR_PARM_FUNCTION_2;
+                return ARR_PARM_FUNCTION_SMALLEST_INTEGER_FINDER_1          ;
+                break;
+
+            case "summation_v1"            :
+
+                return ARR_PARM_FUNCTION_SUMMATION_1                        ;
+                break;
+
+            case "getAverage_v1"            :
+
+                return ARR_PARM_FUNCTION_GET_AVEREAGE_1                        ;
+                break;
+
+            case "rps_v1"            :
+
+                return ARR_PARM_FUNCTION_ROCK_PAPER_SCISSORS_1                        ;
                 break;
 
             default:
 
                 return null;
                 break;
+
 
 
         }
@@ -177,25 +206,151 @@
 
    const ARR_PARM_FUNCAO_INVALIDA   =   "FUNÇÃO INVÁLIDA";
 
-   const ARR_PARM_FUNCTION_1 = []; // this value means "" not null 
-   const ARR_PARM_FUNCTION_2 = [5, "XYZ"];
-   
-   function doSomething() {
-            // For example, alert a message
-            alert("Hello from doSomething!");
-        }
-   
-   
-    function twosomething(p1, p2) {
-            // For example, alert a message
+   const ARR_PARM_FUNCTION_MAKE_NEGATIVE_1              = [4164868                      ]   ;  
+   const ARR_PARM_FUNCTION_SMALLEST_INTEGER_FINDER_1    = [78, 23423423, 6, 32423, 33   ]   ;
+   const ARR_PARM_FUNCTION_SUMMATION_1                  = [8                            ]   ;
+   const ARR_PARM_FUNCTION_GET_AVEREAGE_1               = [10,9,8,7,6,5,4,3,2,1         ]   ;
+   const ARR_PARM_FUNCTION_ROCK_PAPER_SCISSORS_1        = ["paper","scissors"] ;
 
-            let vp1 =   p1;
-            let vp2 =   p2;
-            
-            return vp1 + vp2;
+   function makeNegative_v1(num)
+   {
+        // In this simple assignment you are given a number
+        // and have to make it negative. But maybe the number is 
+        // already negative 
+        // note 1: the number can be negative already, in wich case no change is required
+        // note 2: Zero (0) is no checked for any specific sign. Negative zero
+        // make no mathematical sense.  
+
+        if (num < 0 )
+        {
+            return num;
+        }
+        else
+        {
+            return (num * (-1));
+        }
+        return void 0;
+
+    // end function makeNegative(num)
+   }
+
+   function smallestIntegerFinder_v1(pArrayOfIntegers)
+   {
+
+        // Given an array of Integers your solution should find the smallest Integer
+        // For example: 
+        // Given [34, 15, 88, 2] your solution will return 2;
+        // Given [34, -345, -1, 100] your solution will return -345;
+        // You can assume, for the purpose of this kata, that the supplied array will not be empty;
+
+        let vLenghtOfTheArray = 0;
+        vLenghtOfTheArray   =   pArrayOfIntegers.length;
+
+        let vSmallestInteger    =   0;
+
+        for (let index = 0; index < vLenghtOfTheArray; index++) {
+            const element = pArrayOfIntegers[index];
+
+            vSmallestInteger = index === 0 ? element  : vSmallestInteger;
+        
+            vSmallestInteger    = vSmallestInteger < element    ?   vSmallestInteger    :   element;
+        }
+
+        return vSmallestInteger;
+
+    // end function smallestIntegerFinder(pArrayOfIntegers)
+   }
+
+   function summation_v1(pNum)
+   {
+
+        // Write a function that finds the summation of every number from 1 to num.
+        // The number wil always be a positive integer greater than 0. 
+
+        let vSummation = 0;
+
+        for (let index = 1; index <= pNum; index++) {
+
+            vSummation  = vSummation    +   index; 
 
         }
-   
+
+        return vSummation;
+
+    // end function smallestIntegerFinder(pArrayOfIntegers)
+   }
+
+  function getAverage_v1(pMarks)
+   {
+
+        // It´s the academic year´s end, fateful moment of your school report. The averages must be calculated. All
+        // the students come to you and entreat you to calculate their average for them. Easy! You just need to write 
+        // a script 
+
+        // Return the average of the given array rounded down to its nearest integer.
+
+        // The array will never be empty
+        let vAverage = 0;
+        let vMarksLength    = 0;
+        vMarksLength    = pMarks.length;
+
+        for (let index = 0; index < vMarksLength; index++) {
+
+            vAverage    = vAverage  +   pMarks[index];
+
+        }
+
+        return (Math.floor(vAverage/pMarks.length));
+
+    // end function getAverage_v1(pMarks)
+   }
+
+   function rps_v1(p1, p2)
+   {
+
+        // Let´s play! You have to return wich player won! In case of a draw return "Draw!"
+        // Examples: 
+        // 1. rps('scissors', 'paper'); -- Player 1 won
+        // 2. rps('scissors', 'rock'); -- Player 2 won
+        // 3. rps('paper', 'paper'); -- Draw!
+
+        const SCISSORS = 'scissors';
+        const ROCK = 'rock';
+        const PAPER = 'paper';
+
+        let vWhoWon = 'DRAW!';
+        const vPlayer1Won = 'Player 1 won';
+        const vPlayer2Won = 'Player 2 won';
+        
+        if (p1 === p2) return vWhoWon; // DRAW!
+
+        switch (p1)
+        {
+            case SCISSORS:
+                vWhoWon  = p2 === ROCK? vPlayer2Won : vPlayer1Won;
+                vWhoWon  = p2 === PAPER? vPlayer1Won : vPlayer2Won;
+                break;
+            case ROCK:
+                vWhoWon  = p2 === PAPER? vPlayer2Won : vPlayer1Won;
+                vWhoWon  = p2 === SCISSORS? vPlayer1Won : vPlayer2Won;
+                 break;
+            case PAPER:
+                vWhoWon  = p2 === SCISSORS? vPlayer2Won : vPlayer1Won;
+                vWhoWon  = p2 === ROCK? vPlayer1Won : vPlayer2Won;
+                 break;
+            default:
+                return 'DRAW!';
+                break;
+           
+        // switch (p1)
+        }
+
+        return vWhoWon;
+
+    // end function getAverage_v1(pMarks)
+   }
+
+
 
 </script>
 
