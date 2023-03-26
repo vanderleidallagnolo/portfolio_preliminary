@@ -138,10 +138,16 @@
 
                 if (vfunctionCallNeedspreadSyntax)
                 {
+                    // the call to apply() will need spreadsyntax when
+                    // the items of the array of parameters (vfunctioncall) will be processed 
+                    // in more than 1 parameter
                     functionResult.value    =  funcvar.apply(null, ...[vfunctionCall]);
                 }
                 else
                 {
+                    // the call to apply() will need spreadsyntax when
+                    // the items of the array of parameters (vfunctioncall) will be processed 
+                    // in only one parameter on the function that is been called.
                     functionResult.value    =  funcvar.apply(null, [vfunctionCall]);
                 }
             }
@@ -154,6 +160,7 @@
         }
             
         //functionResult.value    =   funcvar(5,6);  
+        // 
 
       }
 
