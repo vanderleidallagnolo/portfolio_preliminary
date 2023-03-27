@@ -101,7 +101,7 @@
                     functionSource.value = 'From the 44 minutes of this video: https://youtu.be/GZvSYJDk-us'; 
 
                     vResult =  "This was the command generate from Twillio Dashboard:\n";
-                    vResult += "curl 'https://api.twilio.com/2010-04-01/Accounts/ACec3a06470c576d25b8defbf5b77dabd5/Messages.json' -X POST \ --data-urlencode 'To=+5547988596940' \ --data-urlencode 'From=+14407718384' \ --data-urlencode 'Body=Ahoy' \ -u ACec3a06470c576d25b8defbf5b77dabd5:c0b76450256192928f862fc7f825054c\n";
+                    vResult += "curl 'https://api.twilio.com/2010-04-01/Accounts/ACec3a06470c576d25b8defbf5b77dabd5/Messages.json' -X POST \ --data-urlencode 'To=+5547988596940' \ --data-urlencode 'From=+14407718384' \ --data-urlencode 'Body=Ahoy' \ -u [REMOVIDO POR SEGURANÇA]:[REMOVIDO POR SEGURANÇA]\n";
                     vResult += "\n\n";
                     vResult += "#This was the commando line converted to PowerShell command libraries:\n";
                     vResult += '$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"';
@@ -110,12 +110,12 @@
                     vResult += "\n";
                     vResult += '$body = "To=%2B5547988596940&From=%2B14407718384&Body=Ahoy from Power Shell"';
                     vResult += '\n';
-                    vResult += '$secpasswd = ConvertTo-SecureString "c0b76450256192928f862fc7f825054c" -AsPlainText -Force';
+                    vResult += '$secpasswd = ConvertTo-SecureString "[REMOVIDO POR SEGURANÇA]" -AsPlainText -Force';
                     vResult += '\n';
-                    vResult += '$mycreds = New-Object System.Management.Automation.PSCredential ("ACec3a06470c576d25b8defbf5b77dabd5", $secpasswd)';
+                    vResult += '$mycreds = New-Object System.Management.Automation.PSCredential ("[REMOVIDO POR SEGURANÇA]", $secpasswd)';
                     vResult += "\n";
                     vResult += '$response = Invoke-RestMethod';
-                    vResult += " 'https://api.twilio.com/2010-04-01/Accounts/ACec3a06470c576d25b8defbf5b77dabd5/Messages.json' -Method 'POST' -Headers $headers -Body $body -Credential $mycreds";
+                    vResult += " 'https://api.twilio.com/2010-04-01/Accounts/[REMOVIDO POR SEGURANÇA]/Messages.json' -Method 'POST' -Headers $headers -Body $body -Credential $mycreds";
 
                     functionResult.value = vResult; 
                     break;
