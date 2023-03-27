@@ -16,6 +16,7 @@ const SCD_START_PROJECTS_ELLEVO_AUDIT_DB                                =	4;
 const SCD_START_WEB_JAVASCRIPT_DRAG_BORDER					            =	5;
 const SCD_START_PROJECTS_CCMS_THUMBNAIL_CREATOR					        =	6;
 const SCD_START_WEB_JAVASCRIPT_SHOWFUNCTION_SOURCEANDRESULT             =   7;
+const SCD_START_WEB_API_HOW_TO_USE                                      =   8;
 
 function fShowContentDetail(pContentDetailId)
 {
@@ -55,7 +56,11 @@ function fShowContentDetail(pContentDetailId)
         case SCD_START_WEB_JAVASCRIPT_SHOWFUNCTION_SOURCEANDRESULT          :
             window.open("show_function_source_and_result.html"		        );
             break;
-                                    
+
+        case SCD_START_WEB_API_HOW_TO_USE         :
+            window.open("how_to_use_an_api.html"		                );
+            break;
+                                                
         default:
             break;
     

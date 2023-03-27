@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left-section {
+            width: 30%;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .right-section {
+            width: 70%;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 10px;
+            text-decoration: none; 
+        }
+
+        li a:hover {
+           background-color:#ddd; 
+           cursor:pointer; 
+       }
+       
+       input{
+           width :100%;
+           height :30px; 
+       }
+       
+       textarea{
+           width :100%;
+           height :135px; 
+       }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>How to Use an API</h1>
+</header>
+
+<main>
+
+    <script>
+
+        const API_NONE = 0;
+        const API_TWILLIO_SEND_SMS = 1;
+
+        function fCallApi(
+            pApiID
+        )
+        {
+
+            let vResult;
+
+            switch (pApiID)
+            {
+                case API_NONE                     :
+
+                    functionAlias.value = 'UNDEFINED';  
+                    functionCall.value = 'UNDEFINED'; 
+                    functionSource.value = 'UNDEFINED'; 
+                    functionResult.value = 'UNDEFINED'; 
+                    break;
+
+                case API_TWILLIO_SEND_SMS            :
+
+                    functionAlias.value = 'Sending SMS via command line via Twillio API';  
+                    functionCall.value = 'UNDEFINED'; 
+                    functionSource.value = 'From the 44 minutes of this video: https://youtu.be/GZvSYJDk-us'; 
+
+                    vResult =  "This was the command generate from Twillio Dashboard:\n";
+                    vResult += "curl 'https://api.twilio.com/2010-04-01/Accounts/ACec3a06470c576d25b8defbf5b77dabd5/Messages.json' -X POST \ --data-urlencode 'To=+5547988596940' \ --data-urlencode 'From=+14407718384' \ --data-urlencode 'Body=Ahoy' \ -u ACec3a06470c576d25b8defbf5b77dabd5:c0b76450256192928f862fc7f825054c\n";
+                    vResult += "\n\n";
+                    vResult += "#This was the commando line converted to PowerShell command libraries:\n";
+                    vResult += '$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"';
+                    vResult += "\n";
+                    vResult += '$headers.Add("Content-Type", "application/x-www-form-urlencoded")';
+                    vResult += "\n";
+                    vResult += '$body = "To=%2B5547988596940&From=%2B14407718384&Body=Ahoy from Power Shell"';
+                    vResult += '\n';
+                    vResult += '$secpasswd = ConvertTo-SecureString "c0b76450256192928f862fc7f825054c" -AsPlainText -Force';
+                    vResult += '\n';
+                    vResult += '$mycreds = New-Object System.Management.Automation.PSCredential ("ACec3a06470c576d25b8defbf5b77dabd5", $secpasswd)';
+                    vResult += "\n";
+                    vResult += '$response = Invoke-RestMethod';
+                    vResult += " 'https://api.twilio.com/2010-04-01/Accounts/ACec3a06470c576d25b8defbf5b77dabd5/Messages.json' -Method 'POST' -Headers $headers -Body $body -Credential $mycreds";
+
+                    functionResult.value = vResult; 
+                    break;
+
+                default:
+
+                    functionAlias.value = 'UNDEFINED';  
+                    functionCall.value = 'UNDEFINED'; 
+                    functionSource.value = 'UNDEFINED'; 
+                    functionResult.value = 'UNDEFINED'; 
+                    break;
+
+
+
+            }
+
+        // end function fCallApi(
+        }
+
+    </script>
+
+    <div class="left-section">
+      <ul id="links">
+        <li><a function-alias="Return Negative"             function-name="makeNegative_v1"           function-call-needspreadsyntax="false"           onclick="fCallApi(API_TWILLIO_SEND_SMS);">Twillio - send SMS</a></li>
+        <li><a function-alias="Smallest Integer Finder"     function-name="smallestIntegerFinder_v1"  function-call-needspreadsyntax="false"           >UNDEFINED</a></li>
+        <li><a function-alias="Grasshopper Summation"       function-name="summation_v1"              function-call-needspreadsyntax="false"           >UNDEFINED</a></li>
+        <li><a function-alias="Get the mean of an Array"    function-name="getAverage_v1"             function-call-needspreadsyntax="false"           >UNDEFINED</a></li>
+        <li><a function-alias="Rock, Paper and Scissors"    function-name="rps_v1"                    function-call-needspreadsyntax="true"            >UNDEFINED</a></li>
+        <li><a function-alias="Null something"              function-name="null"                      function-call-needspreadsyntax="false"           >UNDEFINED</a></li>
+    </ul>  
+    </div>
+
+    <div class="right-section">
+      <input    id="functionAlias"  placeholder="Function name"     readonly    />
+      <input    id="functionCall"   placeholder="Function call"     readonly    />
+      <textarea id="functionSource" placeholder="Function source"   readonly    ></textarea>  
+      <textarea id="functionResult" placeholder="Function result"   readonly    ></textarea>  
+    </div>
+
+<script>
+    // Get the elements
+    var links = document.getElementById("links");
+    var functionAlias   = document.getElementById("functionAlias"   );
+    var functionCall    = document.getElementById("functionCall"    );
+    var functionSource  = document.getElementById("functionSource"  );
+    var functionResult  = document.getElementById("functionResult"  );
+    
+
+    // Add an event listener to the links
+    links.addEventListener("click", function(event) {
+
+      // Get the target element
+      var target = event.target;
+
+      // Check if it is a link
+      if (target.tagName === "XX") {
+
+         // Get the data attribute values
+         var vfunctionAlias     = target.getAttribute("function-alias"  );
+         var vfunctionCall      = "";
+         var vfunctionSource    = target.getAttribute("function-name"   );
+         var vfunctionResult    = "";
+         var vfunctionCallNeedspreadSyntax  = target.getAttribute("function-call-needspreadsyntax"  );
+         vfunctionCallNeedspreadSyntax = vfunctionCallNeedspreadSyntax === 'true' ? true : false;
+
+         vfunctionCall          = fRetornaParmFunction(vfunctionSource);
+         //vfunctionCall          =   vfunctionCall == ""
+
+         // Set the input and textarea values
+        functionAlias.value     =   vfunctionAlias                                              ;
+        functionCall.value      =   vfunctionCall    ==  null    ?   ARR_PARM_FUNCAO_INVALIDA   :  vfunctionSource + "("+vfunctionCall.join(",") +");"     ; 
+        functionSource.value    =   vfunctionCall    ==  null    ?   ARR_PARM_FUNCAO_INVALIDA   :  window[vfunctionSource].toString()                      ;
+
+        let funcvar;
+        funcvar = window[vfunctionSource];
+
+        let result = 0;
+        try {
+
+            if (vfunctionCall   ==  null)
+            {
+                functionResult.value    =   ARR_PARM_FUNCAO_INVALIDA;
+            }
+            else
+            {
+
+                if (vfunctionCallNeedspreadSyntax)
+                {
+                    // the call to apply() will need spreadsyntax when
+                    // the items of the array of parameters (vfunctioncall) will be processed 
+                    // in more than 1 parameter
+                    functionResult.value    =  funcvar.apply(null, ...[vfunctionCall]);
+                }
+                else
+                {
+                    // the call to apply() will need spreadsyntax when
+                    // the items of the array of parameters (vfunctioncall) will be processed 
+                    // in only one parameter on the function that is been called.
+                    functionResult.value    =  funcvar.apply(null, [vfunctionCall]);
+                }
+            }
+
+        } catch (e) {
+            functionResult.value = "Exceção ao executar a função:\n"; 
+            functionResult.value = functionResult.value +   e.message; 
+        } finally {
+            //functionResult.value = functionResult.value + "\nfinally";
+        }
+            
+        //functionResult.value    =   funcvar(5,6);  
+        // 
+
+      }
+
+            
+   });
+
+   function fRetornaParmFunction(pFunctionName)
+   {
+
+    
+        switch (pFunctionName)
+        {
+            case "makeNegative_v1"                     :
+
+                return ARR_PARM_FUNCTION_MAKE_NEGATIVE_1                    ;
+                break;
+
+            case "smallestIntegerFinder_v1"            :
+
+                return ARR_PARM_FUNCTION_SMALLEST_INTEGER_FINDER_1          ;
+                break;
+
+            case "summation_v1"            :
+
+                return ARR_PARM_FUNCTION_SUMMATION_1                        ;
+                break;
+
+            case "getAverage_v1"            :
+
+                return ARR_PARM_FUNCTION_GET_AVEREAGE_1                        ;
+                break;
+
+            case "rps_v1"            :
+
+                return ARR_PARM_FUNCTION_ROCK_PAPER_SCISSORS_1                        ;
+                break;
+
+            default:
+
+                return null;
+                break;
+
+
+
+        }
+
+
+   }
+   //function fRetornaParmFunction()
+
+   const ARR_PARM_FUNCAO_INVALIDA   =   "FUNÇÃO INVÁLIDA";
+
+   const ARR_PARM_FUNCTION_MAKE_NEGATIVE_1              = [4164868                      ]   ;  
+   const ARR_PARM_FUNCTION_SMALLEST_INTEGER_FINDER_1    = [78, 23423423, 6, 32423, 33   ]   ;
+   const ARR_PARM_FUNCTION_SUMMATION_1                  = [8                            ]   ;
+   const ARR_PARM_FUNCTION_GET_AVEREAGE_1               = [10,9,8,7,6,5,4,3,2,1         ]   ;
+   const ARR_PARM_FUNCTION_ROCK_PAPER_SCISSORS_1        = ["paper","scissors"] ;
+
+   function makeNegative_v1(num)
+   {
+        // In this simple assignment you are given a number
+        // and have to make it negative. But maybe the number is 
+        // already negative 
+        // note 1: the number can be negative already, in wich case no change is required
+        // note 2: Zero (0) is no checked for any specific sign. Negative zero
+        // make no mathematical sense.  
+
+        if (num < 0 )
+        {
+            return num;
+        }
+        else
+        {
+            return (num * (-1));
+        }
+        return void 0;
+
+    // end function makeNegative(num)
+   }
+
+   function smallestIntegerFinder_v1(pArrayOfIntegers)
+   {
+
+        // Given an array of Integers your solution should find the smallest Integer
+        // For example: 
+        // Given [34, 15, 88, 2] your solution will return 2;
+        // Given [34, -345, -1, 100] your solution will return -345;
+        // You can assume, for the purpose of this kata, that the supplied array will not be empty;
+
+        let vLenghtOfTheArray = 0;
+        vLenghtOfTheArray   =   pArrayOfIntegers.length;
+
+        let vSmallestInteger    =   0;
+
+        for (let index = 0; index < vLenghtOfTheArray; index++) {
+            const element = pArrayOfIntegers[index];
+
+            vSmallestInteger = index === 0 ? element  : vSmallestInteger;
+        
+            vSmallestInteger    = vSmallestInteger < element    ?   vSmallestInteger    :   element;
+        }
+
+        return vSmallestInteger;
+
+    // end function smallestIntegerFinder(pArrayOfIntegers)
+   }
+
+   function summation_v1(pNum)
+   {
+
+        // Write a function that finds the summation of every number from 1 to num.
+        // The number wil always be a positive integer greater than 0. 
+
+        let vSummation = 0;
+
+        for (let index = 1; index <= pNum; index++) {
+
+            vSummation  = vSummation    +   index; 
+
+        }
+
+        return vSummation;
+
+    // end function smallestIntegerFinder(pArrayOfIntegers)
+   }
+
+  function getAverage_v1(pMarks)
+   {
+
+        // It´s the academic year´s end, fateful moment of your school report. The averages must be calculated. All
+        // the students come to you and entreat you to calculate their average for them. Easy! You just need to write 
+        // a script 
+
+        // Return the average of the given array rounded down to its nearest integer.
+
+        // The array will never be empty
+        let vAverage = 0;
+        let vMarksLength    = 0;
+        vMarksLength    = pMarks.length;
+
+        for (let index = 0; index < vMarksLength; index++) {
+
+            vAverage    = vAverage  +   pMarks[index];
+
+        }
+
+        return (Math.floor(vAverage/pMarks.length));
+
+    // end function getAverage_v1(pMarks)
+   }
+
+   function rps_v1(p1, p2)
+   {
+
+        // Let´s play! You have to return wich player won! In case of a draw return "Draw!"
+        // Examples: 
+        // 1. rps('scissors', 'paper'); -- Player 1 won
+        // 2. rps('scissors', 'rock'); -- Player 2 won
+        // 3. rps('paper', 'paper'); -- Draw!
+
+        const SCISSORS = 'scissors';
+        const ROCK = 'rock';
+        const PAPER = 'paper';
+
+        let vWhoWon = 'DRAW!';
+        const vPlayer1Won = 'Player 1 won';
+        const vPlayer2Won = 'Player 2 won';
+        
+        if (p1 === p2) return vWhoWon; // DRAW!
+
+        switch (p1)
+        {
+            case SCISSORS:
+                vWhoWon  = p2 === ROCK? vPlayer2Won : vPlayer1Won;
+                vWhoWon  = p2 === PAPER? vPlayer1Won : vPlayer2Won;
+                break;
+            case ROCK:
+                vWhoWon  = p2 === PAPER? vPlayer2Won : vPlayer1Won;
+                vWhoWon  = p2 === SCISSORS? vPlayer1Won : vPlayer2Won;
+                 break;
+            case PAPER:
+                vWhoWon  = p2 === SCISSORS? vPlayer2Won : vPlayer1Won;
+                vWhoWon  = p2 === ROCK? vPlayer1Won : vPlayer2Won;
+                 break;
+            default:
+                return 'DRAW!';
+                break;
+           
+        // switch (p1)
+        }
+
+        return vWhoWon;
+
+    // end function getAverage_v1(pMarks)
+   }
+
+
+
+</script>
+
+</body>
+</html>
