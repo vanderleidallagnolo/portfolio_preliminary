@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left-section {
+            width: 30%;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .right-section {
+            width: 70%;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 10px;
+            text-decoration: none; 
+        }
+
+        li a:hover {
+           background-color:#ddd; 
+           cursor:pointer; 
+       }
+       
+       input{
+           width :100%;
+           height :30px; 
+       }
+       
+       textarea{
+           width :100%;
+           height :135px; 
+       }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>SEND SMS VIA TWILLIO API</h1>
+</header>
+
+<main>
+
+    <script>
+
+        const API_NONE = 0;
+        const API_TWILLIO_SEND_SMS = 1;
+
+        function fCallApi(
+            pApiID
+        )
+        {
+
+            let vResult;
+
+            switch (pApiID)
+            {
+                case API_NONE                     :
+
+                    functionAlias.value = 'UNDEFINED';  
+                    functionCall.value = 'UNDEFINED'; 
+                    functionSource.value = 'UNDEFINED'; 
+                    functionResult.value = 'UNDEFINED'; 
+                    break;
+
+                case API_TWILLIO_SEND_SMS            :
+
+                    functionAlias.value = 'Sending SMS via command line via Twillio API';  
+                    functionCall.value = 'UNDEFINED'; 
+                    functionSource.value = 'From the 44 minutes of this video: https://youtu.be/GZvSYJDk-us'; 
+
+                    vResult =  "[ AS CREDENCIAIS PARA USO EFETIVO DOS CÓDIGOS ABAIXO FORAM REMOVIDOS POR SEGURANÇA]:\n\n";
+                    vResult +=  "This was the command generate from Twillio Dashboard:\n";
+                    vResult += "curl 'https://api.twilio.com/2010-04-01/Accounts/[REMOVIDO POR SEGURANÇA]/Messages.json' -X POST \ --data-urlencode 'To=+5547988596940' \ --data-urlencode 'From=+14407718384' \ --data-urlencode 'Body=Ahoy' \ -u [REMOVIDO POR SEGURANÇA]:[REMOVIDO POR SEGURANÇA]\n";
+                    vResult += "\n\n";
+                    vResult += "#This was the commando line converted to PowerShell command libraries:\n";
+                    vResult += '$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"';
+                    vResult += "\n";
+                    vResult += '$headers.Add("Content-Type", "application/x-www-form-urlencoded")';
+                    vResult += "\n";
+                    vResult += '$body = "To=%2B5547988596940&From=%2B14407718384&Body=Ahoy from Power Shell"';
+                    vResult += '\n';
+                    vResult += '$secpasswd = ConvertTo-SecureString "[REMOVIDO POR SEGURANÇA]" -AsPlainText -Force';
+                    vResult += '\n';
+                    vResult += '$mycreds = New-Object System.Management.Automation.PSCredential ("[REMOVIDO POR SEGURANÇA]", $secpasswd)';
+                    vResult += "\n";
+                    vResult += '$response = Invoke-RestMethod';
+                    vResult += " 'https://api.twilio.com/2010-04-01/Accounts/[REMOVIDO POR SEGURANÇA]/Messages.json' -Method 'POST' -Headers $headers -Body $body -Credential $mycreds";
+
+                    functionResult.value = vResult; 
+                    break;
+
+                default:
+
+                    functionAlias.value = 'UNDEFINED';  
+                    functionCall.value = 'UNDEFINED'; 
+                    functionSource.value = 'UNDEFINED'; 
+                    functionResult.value = 'UNDEFINED'; 
+                    break;
+
+
+
+            }
+
+        // end function fCallApi(
+        }
+
+    </script>
+
+    <div class="right-section">
+        <input    id="textMessage"     placeholder="Digite o texto da mensagem."     />
+        <input    id="numberRecipient"  placeholder="Digite o número no formato +[CÓD. PAÍS][COD. DDD][9][00000000] - Ex.: +5547988586841"     />
+        <button onclick="fSendSMS();">ENVIAR SMS</button>  <button onclick="fLimparCampos();">LIMPAR CAMPOS</button>
+      <textarea id="responseBody"   placeholder="Response body"         ></textarea>  
+      <textarea id="requestResult" placeholder="Response result"       ></textarea>  
+      <textarea id="requestError"   placeholder="Request error"         ></textarea>  
+    </div>
+
+<script>
+
+    function fSendSMS()
+    {
+
+        let vTextMessage;
+        let vResponseBody;
+        let vResponseResult;
+        let vNumberRecipient;
+        let vSenderNumber;
+        let vTwillioAccountSID;
+        let vTwillioAuthToken;
+
+        vTextMessage = document.getElementById("textMessage").value;
+
+        vNumberRecipient = document.getElementById("numberRecipient").value;
+
+        vSenderNumber = prompt('Inform the sender number.');
+
+        vTwillioAccountSID = prompt('Inform the Twillio Account SID.');
+
+        //vTwillioAuthToken = prompt('Inform the Twillio Authentication Token.');
+
+        //alert(vNumberRecipient + ' - ' + vSenderNumber);
+
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Basic QUNlYzNhMDY0NzBjNTc2ZDI1YjhkZWZiZjViNzdkYWJkNTpkOTEwNmUwZTYwN2FiZWQwNWZhY2ZhZTkwZTRjNDY1Zg==");
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("To", vNumberRecipient);
+        urlencoded.append("Body", vTextMessage);
+        //urlencoded.append("MediaUrl", "https://media.giphy.com/media/x6hRCDKc64icg/giphy-downsided.gif");
+        urlencoded.append("From", vSenderNumber);
+
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: 'follow'
+            };
+
+            fetch("https://api.twilio.com/2010-04-01/Accounts/"+vTwillioAccountSID+"/Messages.json", requestOptions)
+            //.then(response => response.text())
+            .then(response => response.text())
+            //.then(result => console.log(result))
+            .then(result =>fTrataRequestResult(result))
+            //.catch(error => console.log('error', error));
+            .catch(error => fTrataRequestError(error));
+
+
+        // end function fSendSMS()
+    }
+
+    function fTrataRequestError(pError)
+    {
+
+        let vError = pError;
+
+        document.getElementById('requestError').value = vError; 
+
+    }
+
+    function fTrataRequestResult(pResult)
+    {
+        let vResult = pResult;
+
+        document.getElementById('requestResult').value = vResult;
+    }
+
+    function fTrataResponse(pResponse)
+    {
+        let vResponse = pResponse;
+
+        document.getElementById('responseBody').value = pResponse;
+
+    }
+
+    function fLimparCampos(){
+
+        document.getElementById('requestError').value = ""; 
+        document.getElementById('requestResult').value = "";
+        document.getElementById('responseBody').value = "";
+
+    }
+
+
+</script>
+
+</body>
+</html>
