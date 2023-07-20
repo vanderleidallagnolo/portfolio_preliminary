@@ -18,6 +18,8 @@ const SCD_START_PROJECTS_CCMS_THUMBNAIL_CREATOR					        =	6;
 const SCD_START_WEB_JAVASCRIPT_SHOWFUNCTION_SOURCEANDRESULT             =   7;
 const SCD_START_WEB_API_HOW_TO_USE                                      =   8;
 const SCD_START_WEB_API_SEND_SMS_VIA_TWILLIO                            =   9;
+const SCD_START_WEB_TEMPLATE_REACT_APP                                  =	10;
+
 
 function fShowContentDetail(pContentDetailId)
 {
@@ -63,9 +65,13 @@ function fShowContentDetail(pContentDetailId)
             break;
                 
         case SCD_START_WEB_API_SEND_SMS_VIA_TWILLIO         :
-            window.open("send_sms_via_twillio.html"		                );
-            break;
-                                                            
+                window.open("send_sms_via_twillio.html"		                );
+                break;
+
+        case SCD_START_WEB_TEMPLATE_REACT_APP         :
+                    window.open("https://vanderleidallagnolo.github.io/gpt3_vanderlei/"		                );
+                    break;
+                                                                        
         default:
             break;
     
